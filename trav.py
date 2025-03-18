@@ -16,17 +16,17 @@ print("User History Columns:", user_history.columns)
 print("Users Columns:", users.columns)
 
 # Merge user history with users
-user_data = pd.merge(user_history, users, on="user_id", how="left")
+user_data = pd.merge(user_history, users, on="UserID", how="left")
 
 # Merge with destinations and reviews
-merged_data = pd.merge(user_data, destinations, on="destination_id", how="left")
-merged_data = pd.merge(merged_data, reviews, on="destination_id", how="left")
+merged_data = pd.merge(user_data, destinations, on="DestinationID", how="left")
+merged_data = pd.merge(merged_data, reviews, on="DestinationID", how="left")
 
 # Create a new column with relevant text information
 merged_data["combined_text"] = (
-    merged_data["destination_name"] + " " +
-    merged_data["category"] + " " +
-    merged_data["review_text"]
+    merged_data["Name"] + " " +
+    merged_data["Type"] + " " +
+    merged_data["ReviewText"]
 )
 # Convert text data to numerical representation using TF-IDF
 vectorizer = TfidfVectorizer(stop_words="english")
